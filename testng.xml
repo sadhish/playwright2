@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="classes" thread-count="5">
+    <listeners>
+        <listener class-name="com.example.playwright.utilities.ExtentReportListener" />
+
+    </listeners>
+    <test name="SMOKE">
+        <parameter name="browser" value="chrome"></parameter>
+
+        <classes>
+            <class name="com.example.playwright.testCases.SwagLabs"/>
+            <class name="com.example.playwright.testCases.CheckProductsPage"/>
+            <class name="com.example.playwright.testCases.AddCartFunctionality"/>
+            <class name="com.example.playwright.apiTestCases.Post_API"></class>
+        </classes>
+    </test>
+<!--    <test name="SANITY">-->
+<!--        <parameter name="browser" value="webkit"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.example.playwright.testCases.SwagLabs"/>-->
+<!--            <class name="com.example.playwright.testCases.CheckProductsPage"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+</suite>
