@@ -13,18 +13,22 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 @Listeners(ExtentReportListener.class)
 public class CheckProductsPage extends PlaywrightFactory {
 
-    private LinkedHashMap<String,String> testData=new LinkedHashMap<>();
+    private LinkedHashMap<String, String> testData = new LinkedHashMap<>();
     SwagLabsLogin swagLabsLogin;
+
     @BeforeSuite
-    public static String getClassName(){return SwagLabs.class.getSimpleName();}
+    public static String getClassName() {
+        return SwagLabs.class.getSimpleName();
+    }
 
 
     @BeforeClass
     void setUp() throws IOException {
         initBrowser("chrome");
-        swagLabsLogin=new SwagLabsLogin(getPage());
-        testData=getTestData(getClassName());
+        swagLabsLogin = new SwagLabsLogin(getPage());
+        testData = getTestData(getClassName());
     }
+
     @Test
     void swagLabsProducts() throws Exception {
         try {
@@ -32,15 +36,16 @@ public class CheckProductsPage extends PlaywrightFactory {
             System.out.println(getPage().locator("text=Products").textContent());
             assertThat(getPage().locator("text=Products")).hasText("Products");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e);
         }
     }
+
     @AfterClass
-    void tearDown(){
+    void tearDown() {
         getPage().close();
         getBrowserContext().close();
-       getBrowser().close();
+        getBrowser().close();
     }
 
 }

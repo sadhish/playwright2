@@ -17,22 +17,22 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PlaywrightFactory {
-     Playwright playwright;
-      Browser browser;
-     BrowserContext browserContext;
-      Page page;
-
-
-
+    Playwright playwright;
+    Browser browser;
+    BrowserContext browserContext;
+    Page page;
     APIRequestContext apiRequestContext;
+
+
     LinkedHashMap<String, String> result = new LinkedHashMap<>();
-    ObjectMapper objectMapper=new ObjectMapper();
+    ObjectMapper objectMapper = new ObjectMapper();
     private static ThreadLocal<Browser> tlBrowser = new ThreadLocal<>();
     private static ThreadLocal<BrowserContext> tlBrowserContext = new ThreadLocal<>();
     private static ThreadLocal<Page> tlPage = new ThreadLocal<>();
     private static ThreadLocal<Playwright> tlPlaywright = new ThreadLocal<>();
-    public static ThreadLocal<APIRequestContext> apiRequestContextThreadLocal=new ThreadLocal<>();
-    public static  ThreadLocal<Response> responseThreadLocal=new ThreadLocal<>();
+    public static ThreadLocal<APIRequestContext> apiRequestContextThreadLocal = new ThreadLocal<>();
+    public static ThreadLocal<Response> responseThreadLocal = new ThreadLocal<>();
+
     public static Playwright getPlaywright() {
         return tlPlaywright.get();
     }
@@ -52,7 +52,8 @@ public class PlaywrightFactory {
     public static APIRequestContext getApiRequestContext() {
         return apiRequestContextThreadLocal.get();
     }
-    public void initAPI(){
+
+    public void initAPI() {
         tlPlaywright.set(Playwright.create());
     }
 
@@ -81,7 +82,7 @@ public class PlaywrightFactory {
 
     public static String takeScreenshot() {
         String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".jpg";
-        if (getPage()!=null) {
+        if (getPage() != null) {
             getPage().screenshot(new Page.ScreenshotOptions()
                     .setPath(Paths.get(path))
                     .setFullPage(true));
@@ -89,8 +90,8 @@ public class PlaywrightFactory {
         }
         return null;
     }
-    public LinkedHashMap<String, String> getTestData(String className) throws IOException
-    {
+
+    public LinkedHashMap<String, String> getTestData(String className) throws IOException {
         JsonFactory jsonFactory = objectMapper.getFactory();
         String path = System.getProperty("user.dir");
         File file = ResourceUtils.getFile(path + "//test-input//testdata.json");
@@ -98,9 +99,10 @@ public class PlaywrightFactory {
         Iterator<Map.Entry<String, JsonNode>> iterator = jsonNode.fields();
         while (iterator.hasNext()) {
             Map.Entry<String, JsonNode> entry = iterator.next();
-            if(entry.getKey().equalsIgnoreCase(className)){
-                result=objectMapper.
-                        convertValue(entry.getValue(), new TypeReference<LinkedHashMap<String, String>>(){});
+            if (entry.getKey().equalsIgnoreCase(className)) {
+                result = objectMapper.
+                        convertValue(entry.getValue(), new TypeReference<LinkedHashMap<String, String>>() {
+                        });
 
                 return result;
             }
