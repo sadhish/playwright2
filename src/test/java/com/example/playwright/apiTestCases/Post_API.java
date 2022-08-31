@@ -1,26 +1,27 @@
 package com.example.playwright.apiTestCases;
 
+import com.example.playwright.testCases.SwagLabs;
 import com.example.playwright.utilities.ExtentReportListener;
 import com.example.playwright.utilities.PlaywrightFactory;
+import com.example.playwright.utilities.SchemaValidation;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.microsoft.playwright.APIRequest;
-import com.microsoft.playwright.APIRequestContext;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.RequestOptions;
+import com.networknt.schema.*;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-
+import org.testng.Assert;
+import org.testng.annotations.*;
 import java.util.HashMap;
-
+@Slf4j
 @Listeners(ExtentReportListener.class)
 public class Post_API extends PlaywrightFactory {
-
-    Playwright playwright;
-    APIRequestContext apiRequestContext;
+    APIResponse apiResponse;
+    SchemaValidation schemaValidation=new SchemaValidation();
 
     @BeforeClass
     void setUpApi() {
@@ -28,25 +29,26 @@ public class Post_API extends PlaywrightFactory {
     }
 
     @Test
-    void getApiCall() throws JSONException {
+    void postApiCall() throws JSONException, JsonProcessingException {
         HashMap<String, String> reqMap = new HashMap<String, String>();
         reqMap.put("title", "any");
         reqMap.put("body", "body");
         reqMap.put("userId", "kkk");
-
-//       apiRequestContext=getPlaywright().request().newContext(new APIRequest.NewContextOptions()
-//            .setBaseURL("https://jsonplaceholder.typicode.com"));
-//      String response=apiRequestContext.post("/posts", RequestOptions.create().setData(reqMap)).text();
-
-
+        //String reqStr=new ObjectMapper().writeValueAsString(reqMap);
         apiRequestContextThreadLocal.set(getPlaywright().request().newContext(new APIRequest.NewContextOptions()
                 .setBaseURL("https://jsonplaceholder.typicode.com"))); //set apirequest value top threadlocal
-        String response = apiRequestContextThreadLocal.get().post("/posts", RequestOptions.create().setData(reqMap)).text();
-
-
+        //String response = apiRequestContextThreadLocal.get().post("/posts", RequestOptions.create().setData(reqMap)).text();
+        apiResponse = apiRequestContextThreadLocal.get().post("/posts", RequestOptions.create().setData(reqMap));
+        Assert.assertEquals(201,apiResponse.status());
+        log.info("Status code is"+apiResponse.status());
+        System.out.println("status"+apiResponse.text());
+        String response= apiResponse.text();
+        schemaValidation.validateSchema("schema",response,"V4");
         JsonObject jsonObject = new Gson().fromJson(response, JsonObject.class);
         System.out.println(jsonObject.get("userId"));
-        jsonObject.entrySet().stream().forEach(e -> System.out.println(e.getKey().toString()));
+//       boolean expected= jsonObject.get("userId").toString().equalsIgnoreCase("kkk");
+//       Assert.assertEquals(expected,true);
+        jsonObject.entrySet().stream().forEach(e -> System.out.println(e.getKey().toString()+","+e.getValue()));
 
     }
 
@@ -54,7 +56,6 @@ public class Post_API extends PlaywrightFactory {
     void tearDown() {
         getApiRequestContext().dispose();
         getPlaywright().close();
-
 
     }
 

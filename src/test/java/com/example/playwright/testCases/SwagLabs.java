@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 @Listeners(ExtentReportListener.class)
+
 public class SwagLabs extends PlaywrightFactory {
+
     SwagLabsLogin swagLabsLogin;
     private LinkedHashMap<String,String> testData=new LinkedHashMap<>();
 
@@ -22,7 +24,8 @@ public class SwagLabs extends PlaywrightFactory {
     swagLabsLogin=new SwagLabsLogin(getPage());
     testData=getTestData(getClassName());
     }
-   @Test
+
+    @Test
     void swagLabsLogin() throws Exception {
         try {
            swagLabsLogin.doLogin(testData);
@@ -30,6 +33,7 @@ public class SwagLabs extends PlaywrightFactory {
             throw new Exception(e);
         }
     }
+
     @AfterClass
     void tearDown(){
         getPage().close();

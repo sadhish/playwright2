@@ -4,7 +4,6 @@ import com.example.playwright.pageObjectModel.SwagLabsLogin;
 import com.example.playwright.utilities.ExtentReportListener;
 import com.example.playwright.utilities.PlaywrightFactory;
 import org.testng.annotations.*;
-
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
@@ -12,6 +11,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 @Listeners(ExtentReportListener.class)
 public class AddCartFunctionality extends PlaywrightFactory {
+
     SwagLabsLogin swagLabsLogin;
     private LinkedHashMap<String, String> testData = new LinkedHashMap<>();
 

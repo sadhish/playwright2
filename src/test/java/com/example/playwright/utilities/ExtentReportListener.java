@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ExtentReportListener extends PlaywrightFactory implements ITestListener {
-
+ private static  AppiumFactory appiumFactory=new AppiumFactory();
     private static final String OUTPUT_FOLDER = "./ExtentReports/";
     private static final String FILE_NAME = "TestExecutionReport.html";
     private static ExtentReports extentReports = init();
@@ -57,7 +57,7 @@ public class ExtentReportListener extends PlaywrightFactory implements ITestList
         System.out.println((result.getMethod().getMethodName() + " passed!"));
         test.get().pass(result.getMethod().getMethodName());
         test.get().pass("testPassed");
-        if (getPage() != null) {
+        if (getPage() != null ) {
             test.get().pass(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot()).build());
         }
     }

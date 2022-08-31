@@ -4,10 +4,8 @@ import com.example.playwright.pageObjectModel.SwagLabsLogin;
 import com.example.playwright.utilities.ExtentReportListener;
 import com.example.playwright.utilities.PlaywrightFactory;
 import org.testng.annotations.*;
-
 import java.io.IOException;
 import java.util.LinkedHashMap;
-
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Listeners(ExtentReportListener.class)
@@ -17,13 +15,11 @@ public class CheckProductsPage extends PlaywrightFactory {
     SwagLabsLogin swagLabsLogin;
 
     @BeforeSuite
-    public static String getClassName() {
-        return SwagLabs.class.getSimpleName();
-    }
-
+    public static String getClassName() {return SwagLabs.class.getSimpleName();}
 
     @BeforeClass
     void setUp() throws IOException {
+
         initBrowser("chrome");
         swagLabsLogin = new SwagLabsLogin(getPage());
         testData = getTestData(getClassName());
@@ -35,10 +31,10 @@ public class CheckProductsPage extends PlaywrightFactory {
             swagLabsLogin.doLogin(testData);
             System.out.println(getPage().locator("text=Products").textContent());
             assertThat(getPage().locator("text=Products")).hasText("Products");
-
-        } catch (Exception e) {
+            }
+        catch (Exception e) {
             throw new Exception(e);
-        }
+         }
     }
 
     @AfterClass

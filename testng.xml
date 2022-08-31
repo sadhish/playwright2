@@ -7,19 +7,34 @@
     </listeners>
     <test name="SMOKE">
         <parameter name="browser" value="chrome"></parameter>
-
         <classes>
             <class name="com.example.playwright.testCases.SwagLabs"/>
             <class name="com.example.playwright.testCases.CheckProductsPage"/>
             <class name="com.example.playwright.testCases.AddCartFunctionality"/>
             <class name="com.example.playwright.apiTestCases.Post_API"></class>
+            <class name="com.example.playwright.apiTestCases.Get_API"></class>
+
+        </classes>
+    </test>
+    <test name="Regression">
+    <parameter name="browser" value="chrome"></parameter>
+    <classes>
+    <class name="com.example.playwright.testCases.BusinessErrorSwagLabInvalidCredentials"/>
+    <class name="com.example.playwright.apiTestCases.LoginUnsuccessful_PostAPI"/>
+    </classes>
+    </test>
+    <test name="Mobile Test Cases">
+        <parameter name="platform-a" value="Android"></parameter>
+        <parameter name="platform-b" value="IOS"></parameter>
+        <classes>
+            <class name="com.example.playwright.mobileAppTestCases.SwagLabsAppLogin"></class>
         </classes>
     </test>
     <!--    <test name="SANITY">-->
     <!--        <parameter name="browser" value="webkit"></parameter>-->
     <!--        <classes>-->
-    <!--            <class name="com.example.playwright.testCases.SwagLabs"/>-->
-    <!--            <class name="com.example.playwright.testCases.CheckProductsPage"/>-->
+    <!--            <class name="SwagLabs"/>-->
+    <!--            <class name="CheckProductsPage"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 </suite>

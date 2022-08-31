@@ -3,5 +3,20 @@
     "url": "https://www.saucedemo.com",
     "username": "standard_user",
     "password": "secret_sauce"
-  }
+  },
+  "SwagLabsAppLogin": {
+    "appName": "SauceLabs",
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "swagLabsAppPackage":"com.swaglabsmobileapp",
+    "swagLabsAppActivity": "com.swaglabsmobileapp.MainActivity",
+    "UDID":"emulator-5554",
+    "IOSUDID": "D00D72BC-586B-48E2-BAFA-3749BCAD357C",
+    "iosAppName": "swaglabs"
+  },
+  "BusinessErrorSwagLabInvalidCredentials":{
+    "url": "https://www.saucedemo.com",
+    "username": "xyz",
+    "password": "xyz"
+}
 }

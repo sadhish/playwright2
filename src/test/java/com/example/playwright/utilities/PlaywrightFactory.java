@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.*;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+@Component
 public class PlaywrightFactory {
     Playwright playwright;
     Browser browser;
@@ -24,6 +25,11 @@ public class PlaywrightFactory {
     APIRequestContext apiRequestContext;
 
 
+    public static void setApiResponse(APIResponse apiResponse) {
+ responseThreadLocal.set(apiResponse);
+    }
+
+    APIResponse apiResponse;
     LinkedHashMap<String, String> result = new LinkedHashMap<>();
     ObjectMapper objectMapper = new ObjectMapper();
     private static ThreadLocal<Browser> tlBrowser = new ThreadLocal<>();
@@ -31,7 +37,7 @@ public class PlaywrightFactory {
     private static ThreadLocal<Page> tlPage = new ThreadLocal<>();
     private static ThreadLocal<Playwright> tlPlaywright = new ThreadLocal<>();
     public static ThreadLocal<APIRequestContext> apiRequestContextThreadLocal = new ThreadLocal<>();
-    public static ThreadLocal<Response> responseThreadLocal = new ThreadLocal<>();
+    public static ThreadLocal<APIResponse> responseThreadLocal = new ThreadLocal<>();
 
     public static Playwright getPlaywright() {
         return tlPlaywright.get();
@@ -52,13 +58,14 @@ public class PlaywrightFactory {
     public static APIRequestContext getApiRequestContext() {
         return apiRequestContextThreadLocal.get();
     }
-
+    public static APIResponse getApiResponse() {return responseThreadLocal.get();}
     public void initAPI() {
         tlPlaywright.set(Playwright.create());
     }
 
 
     public Page initBrowser(String browserName) {
+
         tlPlaywright.set(Playwright.create());
         switch (browserName.toLowerCase()) {
             case "chrome":
