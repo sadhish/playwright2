@@ -3,10 +3,6 @@
     "url": "https://www.saucedemo.com",
     "username": "standard_user",
     "password": "secret_sauce"
-  },
-  "amazon": {
-    "url": "https://amazon.in",
-    "username": "sadhishthiagu@gmail.com",
-    "password": "Winter@19"
   }
+
 }
