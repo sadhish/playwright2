@@ -18,5 +18,15 @@
     "url": "https://www.saucedemo.com",
     "username": "xyz",
     "password": "xyz"
-}
+},
+  "LoginWithInvalidCredentials": {
+    "appName": "SauceLabs",
+    "username": "xyz",
+    "password": "xyz",
+    "swagLabsAppPackage":"com.swaglabsmobileapp",
+    "swagLabsAppActivity": "com.swaglabsmobileapp.MainActivity",
+    "UDID":"emulator-5554",
+    "IOSUDID": "20084238-7ED6-4DA5-AB54-A04F9114D361",
+    "iosAppName": "swaglabs"
+  }
 }

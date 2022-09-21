@@ -19,7 +19,6 @@ public class SwagLabsAppLogin extends AppiumFactory {
         return SwagLabsAppLogin.class.getSimpleName();
     }
 
-
     @BeforeClass @Parameters({"platform-a","platform-b"})
     void setUp() throws IOException {
         testData = playwrightFactory.getTestData(getClassName());
@@ -43,7 +42,9 @@ public class SwagLabsAppLogin extends AppiumFactory {
     }
 @AfterClass
     void tearDown(){
+    if(getappiumDriver()!=null) {
         getappiumDriver().quit();
+    }
 }
 
 }

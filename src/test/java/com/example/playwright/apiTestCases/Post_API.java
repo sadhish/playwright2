@@ -29,7 +29,7 @@ public class Post_API extends PlaywrightFactory {
     }
 
     @Test
-    void postApiCall() throws JSONException, JsonProcessingException {
+    void postApiCall()  {
         HashMap<String, String> reqMap = new HashMap<String, String>();
         reqMap.put("title", "any");
         reqMap.put("body", "body");

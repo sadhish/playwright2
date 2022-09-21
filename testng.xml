@@ -23,13 +23,14 @@
     <class name="com.example.playwright.apiTestCases.LoginUnsuccessful_PostAPI"/>
     </classes>
     </test>
-    <test name="Mobile Test Cases">
-        <parameter name="platform-a" value="Android"></parameter>
-        <parameter name="platform-b" value="IOS"></parameter>
-        <classes>
-            <class name="com.example.playwright.mobileAppTestCases.SwagLabsAppLogin"></class>
-        </classes>
-    </test>
+<!--    <test name="Mobile Test Cases">-->
+<!--        <parameter name="platform-a" value="Android"></parameter>-->
+<!--        <parameter name="platform-b" value="IOS"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.example.playwright.mobileAppTestCases.SwagLabsAppLogin"></class>-->
+<!--            <class name="com.example.playwright.mobileAppTestCases.LoginWithInvalidCredentials"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
     <!--    <test name="SANITY">-->
     <!--        <parameter name="browser" value="webkit"></parameter>-->
     <!--        <classes>-->

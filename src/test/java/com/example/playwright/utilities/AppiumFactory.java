@@ -12,7 +12,6 @@ import java.net.URL;
 
 public class AppiumFactory {
 
-
     AppiumDriver appiumDriver;
     private static ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 
@@ -48,7 +47,7 @@ public class AppiumFactory {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
         URL url = new URL(readProperties.getProperties().getProperty("appiumURL"));
-        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone SE");
+        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone");
         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
         desiredCapabilities.setCapability(MobileCapabilityType.UDID, UDID);
         desiredCapabilities.setCapability("simulatorStartupTimeout", 180000);
@@ -59,7 +58,8 @@ public class AppiumFactory {
         desiredCapabilities.setCapability(MobileCapabilityType.APP, appUrlIos);
         AppiumDriver appiumDriver = new IOSDriver(url, desiredCapabilities);
         appiumDriverThreadLocal.set(appiumDriver);
-        return appiumDriverThreadLocal.get();
+      //  return appiumDriverThreadLocal.get();
+        return  getappiumDriver();
         // return new IOSDriver(url, desiredCapabilities);
     }
 

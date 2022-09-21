@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
