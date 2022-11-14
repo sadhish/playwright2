@@ -80,7 +80,7 @@ public class ExtentReportListener extends PlaywrightFactory implements ITestList
     }
 
     public synchronized void onStart(ITestContext context) {
-        System.out.println("Test Suite started!");
+        System.out.println("Test Suite started!!");
 
     }
 
